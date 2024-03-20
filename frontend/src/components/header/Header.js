@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./Header.css";
 import Notification from "../../img/notification.svg";
 import CloseIcon from "../../img/close.svg";
-import LogoIcon from "../../img/logo512.png"
+
 const Header = ({ users, selectedUserId, setSelectedUserId, socket }) => {
   const [notifications, setNotifications] = useState([]);
   const [open, setOpen] = useState(false);
@@ -76,16 +76,6 @@ const Header = ({ users, selectedUserId, setSelectedUserId, socket }) => {
             </option>
           ))}
         </select>
-        {/* <div className="logo-icon">
-          <div className="icon">
-            <img
-              src={LogoIcon}
-              alt="logo"
-              className="logo-icon"
-              onClick={() => setOpen(false)}
-            />
-          </div>
-        </div> */}
       </div>
     </header>
   );

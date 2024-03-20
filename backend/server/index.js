@@ -11,10 +11,11 @@ const PORT = process.env.PORT || 4000;
 
 const app = express();
 const server = http.Server(app);
+const SOCKET_URL = "http://localhost:3000";
 
 const io = require("socket.io")(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: SOCKET_URL,
   },
 });
 
@@ -47,9 +48,8 @@ app.post('/createComment', function (request, response) {
   });
 });
 
-app.post('/getComment', function (request, response) {
-  const { body } = request;
-  const { id } = body;
+app.get('/getComment', function (request, response) {
+  const { id } = request.query;
   commentModel.getComment(id).then(result => {
     io.emit("new-comment", result);
     response.send(result);

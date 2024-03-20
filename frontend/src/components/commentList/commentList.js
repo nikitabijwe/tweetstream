@@ -1,26 +1,33 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import Comment from "../comment/comment";
 import "./commentList.css";
 
-const Comments = ({ socket, selectedUserId, currentUser, users }) => {
+const HOST_URL = "http://localhost:4000";
+
+const CommentList = ({ socket, selectedUserId, currentUser, users }) => {
   const [comments, setComments] = useState([]);
   const [newcommentid, setNewCommentId] = useState(null);
 
   const [input, setInput] = useState("");
   const commentsEndRef = useRef(null);
 
-  const handleNotification = () => {
+  const handleNotification = useCallback(() => {
     socket.emit("sendNotification", {
       senderName: currentUser,
     });
-  };
+  }, [socket, currentUser]);
 
-  async function sendComment() {
+  const sendComment = useCallback(async () => {
     if (input.trim() !== "") {
-      const result = await fetch("http://localhost:4000/createComment", {
+      const URL = `${HOST_URL}/createComment`;
+      const result = await fetch(URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: currentUser.name, message: input, authorId: selectedUserId }),
+        body: JSON.stringify({
+          name: currentUser.name,
+          message: input,
+          authorId: selectedUserId,
+        }),
       });
       const comment = await result.json();
       setNewCommentId(comment.id);
@@ -28,49 +35,64 @@ const Comments = ({ socket, selectedUserId, currentUser, users }) => {
       return comment;
     }
     return null;
-  }
+  }, [
+    input,
+    currentUser.name,
+    selectedUserId,
+    setNewCommentId,
+    handleNotification,
+  ]);
 
-  async function getComment(comment) {
-    if (comment) {
-      const result = await fetch("http://localhost:4000/getComment", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: comment }),
-      });
-      try {
+  const finduserById = useCallback(
+    (userId) => {
+      if (users) return users.find((user) => user.id === userId);
+    },
+    [users]
+  );
 
-        const newcomment = await result.json() || [];
-        if (newcomment) {
-          const commentWithAuthor = getCommentWithAuthor(newcomment);
-          setComments((comments) => [...comments, commentWithAuthor]);
+  const getCommentWithAuthor = useCallback(
+    (comment) => {
+      const author = finduserById(comment.authorId);
+      return {
+        ...comment,
+        author,
+      };
+    },
+    [finduserById]
+  );
+
+  const getComment = useCallback(
+    async (commentId) => {
+      if (commentId) {
+        const url = `${HOST_URL}/getComment?id=${commentId}`;
+        const result = await fetch(url, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        });
+        try {
+          const newcomment = (await result.json()) || [];
+          if (newcomment) {
+            const commentWithAuthor = getCommentWithAuthor(newcomment);
+            setComments((comments) => [...comments, commentWithAuthor]);
+          }
+        } catch (error) {
+          console.error("Failed to parse JSON:", error);
         }
-      } catch (error) {
-        console.error("Failed to parse JSON:", error);
       }
-    }
-  }
+    },
+    [getCommentWithAuthor, setComments]
+  );
 
   useEffect(() => {
     sendComment();
-    if (newcommentid)
-      getComment(newcommentid);
-  }, [users, newcommentid]);
-
-  function finduserById(userId) {
-    if (users)
-      return users.find((user) => user.id === userId);
-  };
-
-  function getCommentWithAuthor(comment) {
-    const author = finduserById(comment.authorId);
-    return {
-      ...comment,
-      author,
-    };
-  };
+    if (newcommentid) getComment(newcommentid);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [getComment, newcommentid]);
 
   async function fetchComments() {
-    const result = await fetch("http://localhost:4000/getComments");
+    const getCommentsUrl = `${HOST_URL}/getComments`;
+
+    const result = await fetch(getCommentsUrl);
     const comments = await result.json();
     return comments;
   }
@@ -78,11 +100,13 @@ const Comments = ({ socket, selectedUserId, currentUser, users }) => {
   useEffect(() => {
     fetchComments().then((comments) => {
       if (comments) {
-        const commentsWithAuthor = comments.map(comment => getCommentWithAuthor(comment));
+        const commentsWithAuthor = comments.map((comment) =>
+          getCommentWithAuthor(comment)
+        );
         setComments(commentsWithAuthor);
       }
     });
-  }, [users]);
+  }, [getCommentWithAuthor, users]);
 
   useEffect(() => {
     const commentsList = commentsEndRef.current;
@@ -108,7 +132,7 @@ const Comments = ({ socket, selectedUserId, currentUser, users }) => {
         socket.off("new-comment");
       }
     };
-  }, [socket, users, setNewCommentId, selectedUserId]);
+  }, [socket, users, setNewCommentId, selectedUserId, getCommentWithAuthor]);
 
   return (
     <div className="Comments">
@@ -153,4 +177,4 @@ const Comments = ({ socket, selectedUserId, currentUser, users }) => {
   );
 };
 
-export default Comments;
+export default CommentList;

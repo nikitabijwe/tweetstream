@@ -1,5 +1,5 @@
-const date = new Date(); // Assuming this is a UTC datetime
-const utcDateString = date.toISOString(); // Convert to ISO 8601 format
+const date = new Date();
+const utcDateString = date.toISOString();
 
 class Comment {
   constructor(dataAccessObject) {
@@ -35,17 +35,6 @@ class Comment {
     );
   }
   
-  //   UPDATE comments
-  // SET message = 'Successful update'
-  // WHERE id = 190;
-
-  updateComment(body) {
-    return this.dataAccessObject.run(
-      'UPDATE comments SET message = ? WHERE id = ?',
-      [body.message, body.id]
-    );
-  }
-
   getComments() {
     return this.dataAccessObject.all('SELECT * FROM comments');
   }

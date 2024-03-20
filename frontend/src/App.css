@@ -13,24 +13,24 @@
   width: 25vw;
 }
 
-/* Media Query for screens smaller than 768px (such as phones) */
+/* Media Query for screens smaller than 768px (phones) */
 @media only screen and (max-width: 767px) {
   .Container {
-    width: 100%; /* Take up full width */
+    width: 100%;
   }
 }
 
-/* Media Query for screens between 768px and 1024px (such as tablets) */
+/* Media Query for screens between 768px and 1024px (tablets) */
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
   .Container {
-    width: 50vw; /* Take up 50% of viewport width */
+    width: 50vw;
   }
 }
 
-/* Media Query for screens larger than 1024px (such as desktops) */
+/* Media Query for screens larger than 1024px (desktops) */
 @media only screen and (min-width: 1025px) {
   .Container {
-    width: 25vw; /* Maintain the original width */
+    width: 25vw;
   }
 }
 

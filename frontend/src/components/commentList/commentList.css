@@ -1,15 +1,11 @@
 
 .Comments {
-    /* Set a specific height */
     height: calc(
       80vh - 10vh
-    ); /* Adjust as needed, considering the header height */
-  
-    /* Enable vertical scrollbar when needed */
+    );
+
     overflow-y: auto;
-    /* width: 390px; */
     margin-left: auto;
-    /* height: 100%; */
     display: flex;
     flex-direction: column;
     background-color: #20222b;
@@ -34,7 +30,6 @@
     --scrollbar-width-legacy: 10px;
   }
   
-  /* Modern browsers with `scrollbar-*` support */
   @supports (scrollbar-width: auto) {
     .Comments-list {
       scrollbar-color: var(--scrollbar-color-thumb) var(--scrollbar-color-track);
@@ -42,7 +37,6 @@
     }
   }
   
-  /* Legacy browsers with `::-webkit-scrollbar-*` support */
   @supports selector(::-webkit-scrollbar) {
     .Comments-list::-webkit-scrollbar-thumb {
       background: var(--scrollbar-color-thumb);

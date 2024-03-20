@@ -1,9 +1,9 @@
-# TweetStream App [![Build & Test](https://github.com/facebook/create-react-app/actions/workflows/build-and-test.yml/badge.svg?branch=main)]() [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-green.svg)](https://github.com/nikitabijwe/dtd-system/blob/main/README.md)
+# TweetStream App [![Build & Test](https://github.com/facebook/create-react-app/actions/workflows/build-and-test.yml/badge.svg?branch=main)]() [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-green.svg)](https://github.com/nikitabijwe/tweetstream/issues)
 
 ## TweetStream App
 
-- [FrontEnd](https://github.com/nikitabijwe/dtd-system/tree/main/frontend/dte-app) – React
-- [Backend](https://github.com/nikitabijwe/dtd-system/tree/main/backend) – Node.js
+- [FrontEnd](https://github.com/nikitabijwe/tweetstream/tree/main/frontend) – React
+- [Backend](https://github.com/nikitabijwe/tweetstream/tree/main/backend) – Node.js
 
 
 ## UserGuide
@@ -29,3 +29,4 @@ Then open [http://localhost:4000/](http://localhost:4000/) to see your app.<br>
 
 ![](./assests/ss1.png)
 ![](./assests/ss2.png)
+![](./assests/ss3.png)

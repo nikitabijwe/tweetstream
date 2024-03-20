@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import Comments from "./components/commentList/commentList";
+import CommentList from "./components/commentList/commentList";
 import Header from "./components/header/Header";
 import io from "socket.io-client";
 
@@ -44,7 +44,7 @@ function App() {
           setSelectedUserId={defineUser}
           socket={socket}
         />
-        <Comments
+        <CommentList
           socket={socket}
           selectedUserId={selectedUserId}
           currentUser={currentUser}
