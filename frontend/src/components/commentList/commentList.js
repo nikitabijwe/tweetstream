@@ -86,7 +86,7 @@ const CommentList = ({ socket, selectedUserId, currentUser, users }) => {
   useEffect(() => {
     sendComment();
     if (newcommentid) getComment(newcommentid);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getComment, newcommentid]);
 
   async function fetchComments() {
@@ -114,6 +114,44 @@ const CommentList = ({ socket, selectedUserId, currentUser, users }) => {
       commentsList.scrollTop = commentsList.scrollHeight;
     }
   }, [comments]);
+
+  const handleDelete = async (commentId) => {
+    console.log(commentId, "commentIdxds");
+
+    const url = `${HOST_URL}/deleteComment?id=${commentId}`;
+    await fetch(url, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    const updatedComments = comments.filter(
+      (comment) => comment.id !== commentId
+    );
+    setComments(updatedComments);
+  };
+
+  const handleEdit = async (commentId, editedMessage) => {
+    console.log(commentId, "commentIdxds", editedMessage);
+    const timestamp = new Date().toISOString(); // Get the current timestamp
+
+    const URL = `${HOST_URL}/updateComment`;
+    await fetch(URL, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: commentId,
+        message: editedMessage,
+      }),
+    });
+
+    const updatedComments = comments.map((comment) => {
+      if (comment.id === commentId) {
+        return { ...comment, message: editedMessage, created_at: timestamp };
+      }
+      return comment;
+    });
+    setComments(updatedComments);
+  };
 
   useEffect(() => {
     if (socket) {
@@ -146,6 +184,8 @@ const CommentList = ({ socket, selectedUserId, currentUser, users }) => {
             key={comment.id}
             comment={comment}
             isActiveUser={selectedUserId === comment.authorId}
+            handleDelete={handleDelete}
+            handleEdit={handleEdit}
           />
         ))}
       </div>

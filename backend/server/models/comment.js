@@ -19,6 +19,14 @@ class Comment {
   deleteComments() {
     const sql = 'DELETE FROM comments';
     return this.dataAccessObject.run(sql);
+  } 
+
+  deleteComment(commentId) {
+    console.log(commentId, "commentIdwdsew")
+    return this.dataAccessObject.run(
+      'DELETE FROM comments WHERE id = ?',
+      [commentId]
+    );
   }
 
   createComment({ name, message, authorId }) {
@@ -27,6 +35,15 @@ class Comment {
       [name, message, authorId, utcDateString]
     );
   }
+
+  updateComment(body) {
+    console.log(body);
+    return this.dataAccessObject.run(
+      'UPDATE comments SET message = ? WHERE id = ?',
+      [body.message, body.id]
+    );
+  }
+
 
   getComment(id) {
     return this.dataAccessObject.get(

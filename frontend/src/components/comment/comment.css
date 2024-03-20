@@ -35,6 +35,42 @@
     color: rgb(125 130 154);
   }
   
+  .Comment-delete {
+    font-size: 14px;
+    color: rgb(125 130 154);
+    padding: 10px;
+  }
+
+  .Comment-edit {
+    font-size: 14px;
+    color: rgb(125 130 154);
+    padding: 10px;
+  }
+
+  .Comment-save {
+    font-size: 14px;
+    color: rgb(125 130 154);
+    padding: 10px;
+  }
+
+  .Comment-cancel {
+    font-size: 14px;
+    color: rgb(125 130 154);
+    padding: 10px;
+  }
+
+ .Comment-delete:hover {
+  cursor: pointer;
+  color: rgb(188, 115, 115);
+  text-decoration: underline;
+}
+
+.Comment-edit:hover {
+  cursor: pointer;
+  color: rgb(137, 168, 226);
+  text-decoration: underline;
+}
+
   .Comment-body {
     margin-left: 32px;
   }

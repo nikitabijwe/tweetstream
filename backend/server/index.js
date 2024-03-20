@@ -68,6 +68,21 @@ app.delete('/deleteComments', function (request, response) {
   });
 });
 
+app.delete('/deleteComment', function (request, response) {
+  const { id } = request.query;
+  commentModel.deleteComment(id).then(result => {
+    response.send(result);
+  });
+});
+
+app.put('/updateComment', function (request, response) {
+  const { body } = request;
+  commentModel.updateComment(body).then(result => {
+    response.send(result);
+  });
+});
+
+
 app.post('/createUser', function (request, response) {
   const { body } = request;
   userModel.createUser(body).then(result => {
