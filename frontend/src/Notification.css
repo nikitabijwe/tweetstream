@@ -1,0 +1,10 @@
+.Notification {
+    background-color: #f0f0f0;
+    padding: 10px;
+    margin-bottom: 5px;
+  }
+  
+  .Notification-content {
+    font-size: 14px;
+  }
+  

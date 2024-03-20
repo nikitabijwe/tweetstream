@@ -1,0 +1,41 @@
+.Comment {
+    padding: 16px;
+    border-bottom: 1px solid #0f1014;
+    color: #fff;
+  }
+  
+  .Comment-header {
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .Comment-avatar {
+    width: 24px;
+    height: 24px;
+    background-color: #15151c;
+    border-radius: 100%;
+    margin-right: 8px;
+    overflow: hidden;
+  }
+  
+  .Comment-avatar img {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .Comment-author {
+    font-weight: 600;
+    font-size: 14px;
+    margin-right: 8px;
+  }
+  
+  .Comment-time {
+    font-size: 14px;
+    color: rgb(125 130 154);
+  }
+  
+  .Comment-body {
+    margin-left: 32px;
+  }
+  

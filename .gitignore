@@ -1,0 +1,19 @@
+# settings
+.idea/
+.vscode/
+
+# dependencies
+node_modules/
+
+# testing
+/coverage
+/.__pycache__
+
+# production
+/build
+
+# misc
+.DS_Store
+npm-debug.log*
+/.changelog
+.npm/

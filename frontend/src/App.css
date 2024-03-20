@@ -1,0 +1,73 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  margin-top: 5vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+}
+
+.Container {
+  height: 100vh;
+  width: 25vw;
+}
+
+/* Media Query for screens smaller than 768px (such as phones) */
+@media only screen and (max-width: 767px) {
+  .Container {
+    width: 100%; /* Take up full width */
+  }
+}
+
+/* Media Query for screens between 768px and 1024px (such as tablets) */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .Container {
+    width: 50vw; /* Take up 50% of viewport width */
+  }
+}
+
+/* Media Query for screens larger than 1024px (such as desktops) */
+@media only screen and (min-width: 1025px) {
+  .Container {
+    width: 25vw; /* Maintain the original width */
+  }
+}
+
+.Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #ddd;
+}
+
+.Header-notifications {
+  margin-left: auto;
+  position: relative;
+}
+
+.Header-user {
+  display: flex;
+  align-items: center;
+}
+
+.Header-user select {
+  padding: 8px 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  margin-left: 20px;
+}
+
+.Header-user i {
+  font-size: 20px;
+  color: #333;
+  margin-right: 5px;
+}
+
+.Header-user i:hover {
+  color: #555;
+  cursor: pointer;
+}

@@ -1,0 +1,102 @@
+
+.Comments {
+    /* Set a specific height */
+    height: calc(
+      80vh - 10vh
+    ); /* Adjust as needed, considering the header height */
+  
+    /* Enable vertical scrollbar when needed */
+    overflow-y: auto;
+    /* width: 390px; */
+    margin-left: auto;
+    /* height: 100%; */
+    display: flex;
+    flex-direction: column;
+    background-color: #20222b;
+  }
+  
+  .Comments-title {
+    color: #fff;
+    margin: 16px;
+    font-size: 16px;
+    font-weight: normal;
+  }
+  
+  .Comments-list {
+    overflow-y: auto;
+    border-top: 1px solid #0f1014;
+  }
+  
+  .Comments-list {
+    --scrollbar-color-thumb: rgb(96, 97, 98);
+    --scrollbar-color-track: #20222b;
+    --scrollbar-width: thin;
+    --scrollbar-width-legacy: 10px;
+  }
+  
+  /* Modern browsers with `scrollbar-*` support */
+  @supports (scrollbar-width: auto) {
+    .Comments-list {
+      scrollbar-color: var(--scrollbar-color-thumb) var(--scrollbar-color-track);
+      scrollbar-width: var(--scrollbar-width);
+    }
+  }
+  
+  /* Legacy browsers with `::-webkit-scrollbar-*` support */
+  @supports selector(::-webkit-scrollbar) {
+    .Comments-list::-webkit-scrollbar-thumb {
+      background: var(--scrollbar-color-thumb);
+    }
+    .Comments-list::-webkit-scrollbar-track {
+      background: var(--scrollbar-color-track);
+    }
+    .Comments-list::-webkit-scrollbar {
+      max-width: var(--scrollbar-width-legacy);
+      max-height: var(--scrollbar-width-legacy);
+    }
+  }
+  
+  .Comments-box {
+    margin-top: auto;
+    border-top: 1px solid #0f1014;
+    padding: 16px;
+  }
+  
+  .Comments-box__input {
+    background-color: rgb(15 16 20);
+    border: 1px solid transparent;
+    font-family: inherit;
+    font-size: 16px;
+    color: #fff;
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    height: 72px;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    resize: none;
+  }
+  
+  .Comments-box__input:focus,
+  .Comments-box__input:active {
+    border-color: rgb(91 83 255 / 75%);
+    appearance: none;
+  }
+  
+  .Comments-box__btn {
+    background-color: rgb(91 83 255 / 75%);
+    color: #fff;
+    border: 1px solid transparent;
+    padding: 4px 8px;
+    display: inline-block;
+    appearance: none;
+    font-family: inherit;
+    font-size: 14px;
+    border-radius: 4px;
+    margin-left: auto;
+  }
+  
+  .Comments-box__btn:disabled {
+    background-color: #ccc;
+  }  
